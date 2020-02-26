@@ -1,11 +1,7 @@
+from flask_mongoengine import MongoEngine
 
-import csv
-import os
+db = MongoEngine()
 
 
-def read_bestsellers():
-    data_full_path = os.environ['DATA_PATH'] + "/" + \
-        os.environ['NETFLIX_DATA_PATH']
-    with open(data_full_path) as csv_file:
-        reader = csv.reader(csv_file)
-        return list(reader)
+def initialize_db(app):
+    db.init_app(app)

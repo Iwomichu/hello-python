@@ -11,6 +11,31 @@ services:
       - DATA_PATH
       - BESTSELLER_DATA_PATH
       - NETFLIX_DATA_PATH
+      - MONGODB_DATABASE
+      - MONGODB_USERNAME
+      - MONGODB_PASSWORD
+      - MONGODB_HOSTNAME
+    depends_on:
+      - mongodb
+    networks:
+      - backend
+  mongodb:
+    image: mongo
+    container_name: mongodb
+    command: mongod --auth
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME
+      - MONGO_INITDB_ROOT_PASSWORD
+      - MONGO_INITDB_DATABASE
+      - MONGODB_DATA_DIR
+    volumes:
+      - mongodbdata:/${DATA_PATH}/db
+    networks:
+      - backend
 volumes:
   dummy-data:
     external: true
+  mongodbdata:
+networks:
+  backend:
+    driver: bridge
