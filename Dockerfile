@@ -1,5 +1,8 @@
 FROM python:3-slim
 
+ENV PYTHONUNBUFFERED 1
+ENV PYTHONDONTWRITEBYTECODE 1
+
 WORKDIR /tmp/app
 RUN pip install poetry
 

@@ -1,0 +1,5 @@
+{
+  "python.pythonPath": "/home/michaljuralowicz/.cache/pypoetry/virtualenvs/hello-python-u_P6SSQs-py3.7/bin/python",
+  "python.linting.flake8Enabled": true,
+  "python.linting.enabled": true
+}

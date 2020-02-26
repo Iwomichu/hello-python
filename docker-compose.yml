@@ -5,8 +5,12 @@ services:
     ports:
       - '5000:5000'
     volumes:
-      - dummy-data:/var/lib/data
+      - dummy-data:${DATA_PATH}
       - .:/tmp/app
+    environment:
+      - DATA_PATH
+      - BESTSELLER_DATA_PATH
+      - NETFLIX_DATA_PATH
 volumes:
   dummy-data:
     external: true
