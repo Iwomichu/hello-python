@@ -1,7 +1,7 @@
-from flask import Flask, Response
+from flask import Flask, Response, request
 import os
 from db.db import initialize_db
-from db.models import Movie
+from db.models import Movies
 
 __version__ = '0.1.0'
 
@@ -20,10 +20,37 @@ app.config['MONGODB_PASSWORD'] = os.environ['MONGODB_PASSWORD']
 initialize_db(app)
 
 
-@app.route('/')
-def index():
-    movies = Movie.objects().to_json()
+@app.route('/movies')
+def get_movies():
+    movies = Movies.objects().to_json()
     return Response(movies, mimetype='application/json', status=200)
+
+
+@app.route('/movies', methods=['POST'])
+def add_movie():
+    body = request.get_json()
+    movie = Movies(**body).save()
+    id = movie.id
+    return {'id': str(id)}, 200
+
+
+@app.route('/movies/<id>', methods=['PUT'])
+def update_movie(id):
+    body = request.get_json()
+    Movies.objects.get(id=id).update(**body)
+    return '', 200
+
+
+@app.route('/movies/<id>', methods=['DELETE'])
+def delete_movie(id):
+    Movies.objects.get(id=id).delete()
+    return '', 200
+
+
+@app.route('/movies/<id>', methods=['GET'])
+def get_movie(id):
+    movie = Movies.objects.get(id=id).to_json()
+    return Response(movie, mimetype='application/json', status=200)
 
 
 if __name__ == '__main__':
