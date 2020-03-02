@@ -1,7 +1,7 @@
 from .db import db
 
 
-class Movies(db.Document):
+class Movie(db.Document):
     showType = db.StringField(required=True)
     title = db.StringField(required=True)
     casts = db.ListField(db.StringField(), required=True)

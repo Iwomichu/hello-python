@@ -7,11 +7,12 @@ authors = ["Your Name <you@example.com>"]
 [tool.poetry.dependencies]
 python = "^3.7"
 Flask = "^1.1.1"
-pylint = "^2.4.4"
 autopep8 = "^1.5"
 flask-mongoengine = "^0.9.5"
+flask-restful = "^0.3.8"
 
 [tool.poetry.dev-dependencies]
+pylint = "^2.4.4"
 pytest = "^5.2"
 flake8 = "^3.7.9"
 
